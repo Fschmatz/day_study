@@ -21,13 +21,33 @@ ThemeData light = ThemeData(
 ThemeData dark = ThemeData(
     brightness: Brightness.dark,
     primaryColor: Color(0xFF202020),
-    accentColor: Color(0xFF4CB357),
+    accentColor: Color(0xFF5ead66),
     scaffoldBackgroundColor: Color(0xFF202020),
     cardTheme: CardTheme(
       color: Color(0xFF2F2F2F),
     ),
     dialogTheme: DialogTheme(
       backgroundColor: Color(0xFF2F2F2F),
+    ),
+    inputDecorationTheme: InputDecorationTheme(
+        contentPadding: EdgeInsets.symmetric(
+            vertical: 15.0, horizontal: 10.0),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Color(0xFF4CB357),
+          ),
+          borderRadius: BorderRadius.circular(15.0),
+        ),
+        enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.grey.withOpacity(0.3),
+            ),
+            borderRadius: BorderRadius.circular(15.0)),
+        border: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.grey.withOpacity(0.3),
+            ),
+            borderRadius: BorderRadius.circular(15.0))
     ),
     bottomAppBarColor: Color(0xFF171717),
     bottomSheetTheme:

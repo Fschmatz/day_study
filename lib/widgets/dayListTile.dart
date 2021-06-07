@@ -1,25 +1,25 @@
+import 'package:day_study/classes/dayNote.dart';
 import 'package:day_study/db/dayNoteDao.dart';
+import 'package:day_study/pages/editNote.dart';
+import 'package:day_study/pages/newNote.dart';
 import 'package:flutter/material.dart';
 
-class DayCard extends StatefulWidget {
+class DayListTile extends StatefulWidget {
   @override
-  _DayCardState createState() => _DayCardState();
+  _DayListTileState createState() => _DayListTileState();
 
-  int id;
-  String day;
-  String note;
+  DayNote daynote;
   Function() refreshHome;
 
-  DayCard({Key? key, required this.day, required this.id, required this.note,required this.refreshHome})
+  DayListTile({Key? key, required this.daynote,required this.refreshHome})
       : super(key: key);
 }
 
-class _DayCardState extends State<DayCard> {
+class _DayListTileState extends State<DayListTile> {
 
   Future<void> _delete() async {
     final dbDayNotes = DayNoteDao.instance;
-    final deleted = await dbDayNotes.delete(widget.id);
-    widget.refreshHome();
+    final deleted = await dbDayNotes.delete(widget.daynote.id);
   }
 
   showAlertDialogOkDelete(BuildContext context) {
@@ -30,6 +30,7 @@ class _DayCardState extends State<DayCard> {
       ),
       onPressed: () {
         _delete();
+        widget.refreshHome();
         Navigator.of(context).pop();
       },
     );
@@ -79,22 +80,41 @@ class _DayCardState extends State<DayCard> {
                     child: ListTile(
                       leading: Icon(Icons.calendar_today_outlined),
                       title: Text(
-                        widget.day,
+                        widget.daynote.day,
                         style: TextStyle(
                             fontSize: 16, fontWeight: FontWeight.w600),
                       ),
-                      trailing: IconButton(
-                        icon: Icon(Icons.delete_outline_outlined),
-                        onPressed: () {
-                          showAlertDialogOkDelete(context);
-                        },
+                      trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                          IconButton(
+                            icon: Icon(Icons.delete_outline_outlined),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              showAlertDialogOkDelete(context);
+                            },
+                          ),
+                          SizedBox(width: 10,),
+                          IconButton(
+                            icon: Icon(Icons.edit_outlined),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute<void>(
+                                    builder: (BuildContext context) => EditNote(dayNoteEdit: widget.daynote),
+                                    fullscreenDialog: true,
+                                  )).then((value) => widget.refreshHome());
+                            },
+                          ),
+                        ],
                       ),
                     ),
                   ),
                   Divider(),
                   ListTile(
                     leading: Icon(Icons.text_snippet_outlined),
-                    title: Text(widget.note,style: TextStyle(
+                    title: Text(widget.daynote.note,style: TextStyle(
                         fontSize: 16),),
                   )
                 ],
@@ -106,22 +126,13 @@ class _DayCardState extends State<DayCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-        elevation: 3,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: InkWell(
-          customBorder: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-          onTap: openBottomMenu,
-          child: Center(
-              child: Text(widget.day,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 16))),
-        ));
+    return ListTile(
+      leading: Icon(Icons.calendar_today_outlined),
+      title: Text(widget.daynote.day,
+          style: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 16)),
+      onTap: openBottomMenu,
+    );
   }
 }

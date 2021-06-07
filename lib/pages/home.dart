@@ -1,7 +1,8 @@
 import 'dart:async';
+import 'package:day_study/classes/dayNote.dart';
 import 'package:day_study/db/dayNoteDao.dart';
 import 'package:day_study/pages/newNote.dart';
-import 'package:day_study/widgets/dayCard.dart';
+import 'package:day_study/widgets/dayListTile.dart';
 import 'package:flutter/material.dart';
 import 'configs/settingsPage.dart';
 import 'package:intl/intl.dart';
@@ -12,7 +13,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
   List<Map<String, dynamic>> dayNotesList = [];
   final dbDayNotes = DayNoteDao.instance;
 
@@ -24,8 +24,6 @@ class _HomeState extends State<Home> {
 
   getCurrentDate() {
     return DateFormat('dd/MM').format(DateTime.now());
-
-    //getCurrentDate().toString()
   }
 
   Future<void> getAllDayNotes() async {
@@ -43,25 +41,23 @@ class _HomeState extends State<Home> {
           elevation: 0,
         ),
         body: ListView(
+          physics: AlwaysScrollableScrollPhysics(),
           children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-              child: GridView.builder(
-                  physics: ScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: dayNotesList.length,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 5,
-                  ),
-                  itemBuilder: (BuildContext context, int index) {
-                    return DayCard(
-                        day: dayNotesList[index]['day'],
-                        note: dayNotesList[index]['note'],
-                        id: dayNotesList[index]['id'],
-                        refreshHome: getAllDayNotes,
-                    );
-                  }),
-            ),
+            ListView.separated(
+                physics: NeverScrollableScrollPhysics(),
+                separatorBuilder: (context, index) => const Divider(),
+                shrinkWrap: true,
+                itemCount: dayNotesList.length,
+                itemBuilder: (context, index) {
+                  return DayListTile(
+                    daynote: new DayNote(
+                      dayNotesList[index]['id'],
+                      dayNotesList[index]['day'],
+                      dayNotesList[index]['note'],
+                    ),
+                    refreshHome: getAllDayNotes,
+                  );
+                }),
           ],
         ),
         floatingActionButton: Container(
@@ -75,7 +71,7 @@ class _HomeState extends State<Home> {
                     MaterialPageRoute<void>(
                       builder: (BuildContext context) => NewNote(),
                       fullscreenDialog: true,
-                    ));
+                    )).then((value) => getAllDayNotes());
               },
               child: Icon(
                 Icons.add,

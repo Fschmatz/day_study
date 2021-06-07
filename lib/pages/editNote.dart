@@ -1,38 +1,45 @@
+import 'package:day_study/classes/dayNote.dart';
 import 'package:day_study/db/dayNoteDao.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
-class NewNote extends StatefulWidget {
+class EditNote extends StatefulWidget {
+
+  DayNote dayNoteEdit;
+
+  EditNote({Key? key, required this.dayNoteEdit})
+      : super(key: key);
 
   @override
-  _NewNoteState createState() => _NewNoteState();
+  _EditNoteState createState() => _EditNoteState();
 }
 
-class _NewNoteState extends State<NewNote> {
+class _EditNoteState extends State<EditNote> {
 
   final dbDayNotes = DayNoteDao.instance;
 
   TextEditingController customControllerNote = TextEditingController();
 
-
   @override
   void initState() {
     super.initState();
+    customControllerNote.text = widget.dayNoteEdit.note;
   }
 
   getCurrentDate() {
     return DateFormat('dd/MM').format(DateTime.now());
   }
 
-  void _saveNote() async {
+  void _updateDayNote() async {
     Map<String, dynamic> row = {
+      DayNoteDao.columnId: widget.dayNoteEdit.id,
+      DayNoteDao.columnDay: widget.dayNoteEdit.day,
       DayNoteDao.columnNote: customControllerNote.text,
-      DayNoteDao.columnDay: getCurrentDate().toString(),
     };
-    final id = await dbDayNotes.insert(row);
-    print('id = $id');
+    final update = await dbDayNotes.update(row);
   }
+
 
   String checkProblems() {
     String errors = "";
@@ -93,7 +100,7 @@ class _NewNoteState extends State<NewNote> {
                 tooltip: 'Save',
                 onPressed: () {
                   if (checkProblems().isEmpty) {
-                    _saveNote();
+                    _updateDayNote();
                     Navigator.of(context).pop();
                   } else {
                     showAlertDialogErrors(context);
@@ -120,16 +127,14 @@ class _NewNoteState extends State<NewNote> {
                     maxLines: 10,
                     maxLength: 1000,
                     maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                    textCapitalization: TextCapitalization.sentences,
                     keyboardType: TextInputType.name,
                     controller: customControllerNote,
                     decoration: InputDecoration(
-                      focusColor: Theme.of(context).accentColor,
                         prefixIcon: Icon(Icons.text_snippet_outlined, size: 20,color: Theme.of(context)
                             .textTheme
                             .headline6!
                             .color!
-                            ,),
+                           ),
                         hintText: "Note",
                         helperText: "* Required",
                     ),
