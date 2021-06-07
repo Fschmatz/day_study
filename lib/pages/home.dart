@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:day_study/db/dayNoteDao.dart';
 import 'package:day_study/pages/newNote.dart';
 import 'package:day_study/widgets/dayCard.dart';
 import 'package:flutter/material.dart';
@@ -12,12 +13,13 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
-  List<Map<String, dynamic>> moods = [];
+  List<Map<String, dynamic>> dayNotesList = [];
+  final dbDayNotes = DayNoteDao.instance;
 
   @override
   void initState() {
     super.initState();
-   // getAllDayNotes();
+    getAllDayNotes();
   }
 
   getCurrentDate() {
@@ -26,55 +28,11 @@ class _HomeState extends State<Home> {
     //getCurrentDate().toString()
   }
 
-  /*Future<void> getAllDayNotes() async {
-    var resp = await db.queryAllRowsDesc();
+  Future<void> getAllDayNotes() async {
+    var resp = await dbDayNotes.queryAllRowsDesc();
     setState(() {
-      moods = resp;
+      dayNotesList = resp;
     });
-  }*/
-
- /*
-  Future<void> _saveMood(String name, String color) async {
-    setState(() {
-      moods = moodsEmptyAnim;
-    });
-    Map<String, dynamic> row = {
-      MoodDao.columnName: name,
-      MoodDao.columnColor: color,
-    };
-    final id = await db.insert(row);
-  }
-
-  Future<void> _delete(int id) async {
-    final deleted = await db.delete(id);
-    getAllCounts();
-  }*/
-
-  //BOTTOM MENU
-  void bottomMenuAddMood(context) {
-    showModalBottomSheet(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-              topLeft: const Radius.circular(20.0),
-              topRight: const Radius.circular(20.0)),
-        ),
-        isScrollControlled: true,
-        context: context,
-        builder: (BuildContext bc) {
-          return Container(
-            child: Wrap(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                  child: ListTile(title: Text("Day X:",textAlign: TextAlign.center,style: TextStyle(
-                      fontSize: 19,
-                      fontWeight: FontWeight.w600),),
-                  ),
-                ),
-              ],
-            ),
-          );
-        });
   }
 
   @override
@@ -91,14 +49,16 @@ class _HomeState extends State<Home> {
               child: GridView.builder(
                   physics: ScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: moods.length,
+                  itemCount: dayNotesList.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 5,
                   ),
                   itemBuilder: (BuildContext context, int index) {
                     return DayCard(
-                        day: '06/06',
-                        id: index
+                        day: dayNotesList[index]['day'],
+                        note: dayNotesList[index]['note'],
+                        id: dayNotesList[index]['id'],
+                        refreshHome: getAllDayNotes,
                     );
                   }),
             ),

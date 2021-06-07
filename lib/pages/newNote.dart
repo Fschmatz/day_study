@@ -1,6 +1,7 @@
 import 'package:day_study/db/dayNoteDao.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 
 class NewNote extends StatefulWidget {
   @override
@@ -9,7 +10,7 @@ class NewNote extends StatefulWidget {
 
 class _NewNoteState extends State<NewNote> {
 
-  final db = DayNoteDao.instance;
+  final dbDayNotes = DayNoteDao.instance;
 
   TextEditingController customControllerNote = TextEditingController();
 
@@ -19,20 +20,24 @@ class _NewNoteState extends State<NewNote> {
     super.initState();
   }
 
+  getCurrentDate() {
+    return DateFormat('dd/MM').format(DateTime.now());
+  }
 
-  /*void _saveNote() async {
+
+  void _saveNote() async {
     Map<String, dynamic> row = {
-      BugDao.columnDescription: customControllerDescription.text,
-      BugDao.columnApplicationName: customControllerApplicationName.text,
+      DayNoteDao.columnNote: customControllerNote.text,
+      DayNoteDao.columnDay: getCurrentDate().toString(),
     };
-    final id = await dbBug.insert(row);
+    final id = await dbDayNotes.insert(row);
     print('id = $id');
-  }*/
+  }
 
   String checkProblems() {
     String errors = "";
     if (customControllerNote.text.isEmpty) {
-      errors += "Insert Application Name\n";
+      errors += "Note is empty\n";
     }
     return errors;
   }
@@ -78,7 +83,7 @@ class _NewNoteState extends State<NewNote> {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text("New Bug"),
+          title: Text("New Note"),
           elevation: 0,
           actions: [
             Padding(
@@ -88,7 +93,7 @@ class _NewNoteState extends State<NewNote> {
                 tooltip: 'Save',
                 onPressed: () {
                   if (checkProblems().isEmpty) {
-                    //_saveBug();
+                    _saveNote();
                     Navigator.of(context).pop();
                   } else {
                     showAlertDialogErrors(context);
@@ -104,16 +109,22 @@ class _NewNoteState extends State<NewNote> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  ListTile(
+                    contentPadding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                    leading: Icon(Icons.calendar_today_outlined),
+                    title: Text(getCurrentDate().toString()),
+                  ),
+                  const SizedBox(height: 10,),
                   TextField(
                     minLines: 1,
-                    maxLines: 5,
+                    maxLines: 10,
                     maxLength: 1000,
                     maxLengthEnforcement: MaxLengthEnforcement.enforced,
                     textCapitalization: TextCapitalization.sentences,
                     keyboardType: TextInputType.name,
                     controller: customControllerNote,
                     decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.article_outlined, size: 20),
+                        prefixIcon: Icon(Icons.text_snippet_outlined, size: 20),
                         hintText: "Note",
                         helperText: "* Required",
                         contentPadding: new EdgeInsets.symmetric(
@@ -122,18 +133,18 @@ class _NewNoteState extends State<NewNote> {
                           borderSide: BorderSide(
                             color: Colors.grey.withOpacity(0.3),
                           ),
-                          borderRadius: BorderRadius.circular(10.0),
+                          borderRadius: BorderRadius.circular(15.0),
                         ),
                         enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: Colors.grey.withOpacity(0.3),
                             ),
-                            borderRadius: BorderRadius.circular(10.0)),
+                            borderRadius: BorderRadius.circular(15.0)),
                         border: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: Colors.grey.withOpacity(0.3),
                             ),
-                            borderRadius: BorderRadius.circular(10.0))
+                            borderRadius: BorderRadius.circular(15.0))
                     ),
                     style: TextStyle(
                       fontSize: 17,

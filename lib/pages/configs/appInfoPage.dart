@@ -5,11 +5,11 @@ import 'package:url_launcher/url_launcher.dart';
 class AppInfoPage extends StatelessWidget {
 
   _launchGithub()  {
-    const url = 'https://github.com/Fschmatz/moodiefschmtz';
+    const url = 'https://github.com/Fschmatz/day_study';
     launch(url);
   }
 
-  Color? themeColorApp = Colors.lime[600];
+  Color? themeColorApp = Color(0xFF4CB357);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class AppInfoPage extends StatelessWidget {
           const SizedBox(height: 20),
           CircleAvatar(
             radius: 55,
-            backgroundColor: Colors.pink[200],
+            backgroundColor: Colors.redAccent,
             child: CircleAvatar(
               radius: 50,
               backgroundImage: AssetImage('assets/avatar.jpg'),
@@ -112,7 +112,7 @@ class AppInfoPage extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.messenger_outline),
             title: Text(
-              "?????",
+              "Develop a passion for learning. If you do, you will never cease to grow.",
               style: TextStyle(fontSize: 16),
             ),
           ),
