@@ -116,6 +116,7 @@ class _NewNoteState extends State<NewNote> {
                   ),
                   const SizedBox(height: 10,),
                   TextField(
+                    autofocus: true,
                     minLines: 1,
                     maxLines: 10,
                     maxLength: 1000,
@@ -123,6 +124,7 @@ class _NewNoteState extends State<NewNote> {
                     textCapitalization: TextCapitalization.sentences,
                     keyboardType: TextInputType.name,
                     controller: customControllerNote,
+                    textAlign: TextAlign.justify,
                     decoration: InputDecoration(
                       focusColor: Theme.of(context).accentColor,
                         prefixIcon: Icon(Icons.text_snippet_outlined, size: 20,color: Theme.of(context)

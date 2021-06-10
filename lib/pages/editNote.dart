@@ -123,12 +123,14 @@ class _EditNoteState extends State<EditNote> {
                   ),
                   const SizedBox(height: 10,),
                   TextField(
+                    autofocus: true,
                     minLines: 1,
                     maxLines: 10,
                     maxLength: 1000,
                     maxLengthEnforcement: MaxLengthEnforcement.enforced,
                     keyboardType: TextInputType.name,
                     controller: customControllerNote,
+                    textAlign: TextAlign.justify,
                     decoration: InputDecoration(
                         prefixIcon: Icon(Icons.text_snippet_outlined, size: 20,color: Theme.of(context)
                             .textTheme
