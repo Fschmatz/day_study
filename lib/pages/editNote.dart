@@ -126,11 +126,10 @@ class _EditNoteState extends State<EditNote> {
                     autofocus: true,
                     minLines: 1,
                     maxLines: 10,
-                    maxLength: 1000,
+                    maxLength: 1500,
                     maxLengthEnforcement: MaxLengthEnforcement.enforced,
                     keyboardType: TextInputType.name,
                     controller: customControllerNote,
-                    textAlign: TextAlign.justify,
                     decoration: InputDecoration(
                         prefixIcon: Icon(Icons.text_snippet_outlined, size: 20,color: Theme.of(context)
                             .textTheme

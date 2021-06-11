@@ -119,12 +119,11 @@ class _NewNoteState extends State<NewNote> {
                     autofocus: true,
                     minLines: 1,
                     maxLines: 10,
-                    maxLength: 1000,
+                    maxLength: 1500,
                     maxLengthEnforcement: MaxLengthEnforcement.enforced,
                     textCapitalization: TextCapitalization.sentences,
                     keyboardType: TextInputType.name,
                     controller: customControllerNote,
-                    textAlign: TextAlign.justify,
                     decoration: InputDecoration(
                       focusColor: Theme.of(context).accentColor,
                         prefixIcon: Icon(Icons.text_snippet_outlined, size: 20,color: Theme.of(context)

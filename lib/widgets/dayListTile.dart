@@ -86,6 +86,33 @@ class _DayListTileState extends State<DayListTile> {
                               fontSize: 13,
                               fontWeight: FontWeight.w700,
                               color: Theme.of(context).accentColor)),
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          IconButton(
+                            icon: Icon(Icons.delete_outline_outlined,size: 20,),
+                            splashRadius: 26,
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              showAlertDialogOkDelete(context);
+                            },
+                          ),
+                          const SizedBox(width: 10,),
+                          IconButton(
+                            icon: Icon(Icons.edit_outlined,size: 20,),
+                            splashRadius: 26,
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute<void>(
+                                    builder: (BuildContext context) => EditNote(dayNoteEdit: widget.daynote),
+                                    fullscreenDialog: true,
+                                  )).then((value) => widget.refreshHome());
+                            },
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   ListTile(
@@ -110,53 +137,8 @@ class _DayListTileState extends State<DayListTile> {
                   ListTile(
                     leading: Icon(Icons.text_snippet_outlined),
                     title: Text(widget.daynote.note,
-                      textAlign: TextAlign.justify,
                       style: TextStyle(
                           fontSize: 16),),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 25, 0, 0),
-                    child: Center(
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          OutlinedButton.icon(
-                            icon: Icon(Icons.delete_outline_outlined, color: Theme.of(context).accentColor),
-                            label: Text("Delete",style: TextStyle( color: Theme.of(context).accentColor),),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                              showAlertDialogOkDelete(context);
-                            },
-                            style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(32.0),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 50,),
-                          OutlinedButton.icon(
-                            icon: Icon(Icons.edit_outlined, color: Theme.of(context).accentColor),
-                            label: Text("Edit",style: TextStyle( color: Theme.of(context).accentColor),),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                                  Navigator.push(
-                                      context,
-                                       MaterialPageRoute<void>(
-                                         builder: (BuildContext context) => EditNote(dayNoteEdit: widget.daynote),
-                                        fullscreenDialog: true,
-                                       )).then((value) => widget.refreshHome());
-                            },
-                            style: ElevatedButton.styleFrom(
-                              //side: BorderSide(width: 2.0, color: Colors.blue),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(32.0),
-                              ),
-                            ),
-                          ),
-
-                        ],
-                      ),
-                    ),
                   ),
                 ],
               ),
@@ -170,7 +152,6 @@ class _DayListTileState extends State<DayListTile> {
     return ListTile(
       leading: Icon(Icons.calendar_today_outlined),
       title: Text(widget.daynote.day,
-          textAlign: TextAlign.justify,
           style: TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: 16)),
