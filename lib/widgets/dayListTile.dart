@@ -1,7 +1,6 @@
 import 'package:day_study/classes/dayNote.dart';
 import 'package:day_study/db/dayNoteDao.dart';
 import 'package:day_study/pages/editNote.dart';
-import 'package:day_study/pages/newNote.dart';
 import 'package:flutter/material.dart';
 
 class DayListTile extends StatefulWidget {
@@ -26,11 +25,12 @@ class _DayListTileState extends State<DayListTile> {
     Widget okButton = TextButton(
       child: Text(
         "Yes",
-        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Theme.of(context).accentColor),
       ),
       onPressed: () {
         _delete();
         widget.refreshHome();
+        Navigator.of(context).pop();
         Navigator.of(context).pop();
       },
     );
@@ -60,91 +60,104 @@ class _DayListTileState extends State<DayListTile> {
   }
 
   //BOTTOM MENU
-  void openBottomMenu() {
+  openBottomMenuScrollable() {
     showModalBottomSheet(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-              topLeft: const Radius.circular(20.0),
-              topRight: const Radius.circular(20.0)),
-        ),
-        isScrollControlled: true,
-        context: context,
-        builder: (BuildContext bc) {
-          return Container(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 0, 30),
-              child: Wrap(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                    child: ListTile(
-                      leading: SizedBox(
-                        height: 0.1,
-                      ),
-                      title: Text("Day".toUpperCase(),
-                          style: TextStyle(
-                              fontSize: 13,
-                              fontWeight: FontWeight.w700,
-                              color: Theme.of(context).accentColor)),
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          IconButton(
-                            icon: Icon(Icons.delete_outline_outlined,size: 20,),
-                            splashRadius: 26,
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                              showAlertDialogOkDelete(context);
-                            },
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+            topLeft: const Radius.circular(20.0),
+            topRight: const Radius.circular(20.0)),
+      ),
+      context: context,
+      isScrollControlled: true,
+      builder: (BuildContext context) {
+        return DraggableScrollableSheet(
+          expand: false,
+          initialChildSize: 0.35,
+          maxChildSize: widget.daynote.note.length > 350 ?  0.7 : 0.4,
+          builder: (BuildContext context, myscrollController) {
+            return Container(
+              child: ListView.builder(
+                controller: myscrollController,
+                itemCount: 1,
+                itemBuilder: (BuildContext context, int index) {
+                  return Container(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 10, 0, 30),
+                      child: Wrap(
+                        children: <Widget>[
+                          ListTile(
+                            leading: SizedBox(
+                              height: 0.1,
+                            ),
+                            title: Text("Day".toUpperCase(),
+                                style: TextStyle(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w700,
+                                    color: Theme.of(context).accentColor)),
+                            trailing: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                IconButton(
+                                  icon: Icon(Icons.delete_outline_outlined,size: 20,),
+                                  splashRadius: 26,
+                                  onPressed: () {
+                                   // Navigator.of(context).pop();
+                                    showAlertDialogOkDelete(context);
+                                  },
+                                ),
+                                const SizedBox(width: 10,),
+                                IconButton(
+                                  icon: Icon(Icons.edit_outlined,size: 20,),
+                                  splashRadius: 26,
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute<void>(
+                                          builder: (BuildContext context) => EditNote(dayNoteEdit: widget.daynote),
+                                          fullscreenDialog: true,
+                                        )).then((value) => widget.refreshHome());
+                                  },
+                                ),
+                              ],
+                            ),
                           ),
-                          const SizedBox(width: 10,),
-                          IconButton(
-                            icon: Icon(Icons.edit_outlined,size: 20,),
-                            splashRadius: 26,
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute<void>(
-                                    builder: (BuildContext context) => EditNote(dayNoteEdit: widget.daynote),
-                                    fullscreenDialog: true,
-                                  )).then((value) => widget.refreshHome());
-                            },
+                          ListTile(
+                            leading: Icon(Icons.calendar_today_outlined),
+                            title: Text(
+                              widget.daynote.day,
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.w600),
+                            ),
+                          ),
+                          Divider(),
+                          ListTile(
+                            leading: SizedBox(
+                              height: 0.1,
+                            ),
+                            title: Text("Note".toUpperCase(),
+                                style: TextStyle(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w700,
+                                    color: Theme.of(context).accentColor)),
+                          ),
+                          ListTile(
+                            leading: Icon(Icons.text_snippet_outlined),
+                            title: Text(widget.daynote.note,
+                              style: TextStyle(
+                                  fontSize: 16),),
                           ),
                         ],
                       ),
                     ),
-                  ),
-                  ListTile(
-                    leading: Icon(Icons.calendar_today_outlined),
-                    title: Text(
-                      widget.daynote.day,
-                      style: TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.w600),
-                    ),
-                  ),
-                  Divider(),
-                  ListTile(
-                    leading: SizedBox(
-                      height: 0.1,
-                    ),
-                    title: Text("Note".toUpperCase(),
-                        style: TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w700,
-                            color: Theme.of(context).accentColor)),
-                  ),
-                  ListTile(
-                    leading: Icon(Icons.text_snippet_outlined),
-                    title: Text(widget.daynote.note,
-                      style: TextStyle(
-                          fontSize: 16),),
-                  ),
-                ],
+                  );
+                },
               ),
-            ),
-          );
-        });
+            );
+          },
+        );
+      },
+    );
   }
 
   @override
@@ -155,7 +168,7 @@ class _DayListTileState extends State<DayListTile> {
           style: TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: 16)),
-      onTap: openBottomMenu,
+      onTap: openBottomMenuScrollable,
     );
   }
 }

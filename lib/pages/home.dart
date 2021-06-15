@@ -56,6 +56,7 @@ class _HomeState extends State<Home> {
                       dayNotesList[index]['note'],
                     ),
                     refreshHome: getAllDayNotes,
+                    key: UniqueKey(),
                   );
                 }),
           ],

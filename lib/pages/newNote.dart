@@ -118,11 +118,9 @@ class _NewNoteState extends State<NewNote> {
                   TextField(
                     autofocus: true,
                     minLines: 1,
-                    maxLines: 10,
-                    maxLength: 1500,
+                    maxLines: 12,
+                    maxLength: 2000,
                     maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                    textCapitalization: TextCapitalization.sentences,
-                    keyboardType: TextInputType.name,
                     controller: customControllerNote,
                     decoration: InputDecoration(
                       focusColor: Theme.of(context).accentColor,

@@ -1,15 +1,19 @@
 class Changelog{
 
-  static String appVersion = "1.0.2";
+  static String appVersion = "1.1.0";
   static String appName = "Day Study Fschmtz";
 
   static String changelogCurrent = '''
-1.0.2
-- Technically Usable
-- UI Changes
+1.1.0
+- Bottom Sheet with Scroll
+- Bug Fixes
 ''';
 
   static String changelogsOld = '''
+1.0.2
+- Technically Usable
+- UI Changes
+
 0.4.0
 - ListTiles on home
 - Refresh on New/Delete
