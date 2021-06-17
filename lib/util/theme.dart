@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 ThemeData light = ThemeData(
     brightness: Brightness.light,
     primaryColor: Color(0xFFFFFFFF),
-    accentColor: Color(0xFFe3bc3b),
+    accentColor: Color(0xFFFDD835),
     scaffoldBackgroundColor: Color(0xFFFFFFFF),
     cardTheme: CardTheme(
       color: Color(0xFFF5F5F5),
@@ -18,7 +18,7 @@ ThemeData light = ThemeData(
             vertical: 15.0, horizontal: 10.0),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: Color(0xFFe3bc3b),
+            color: Color(0xFFFDD835),
           ),
           borderRadius: BorderRadius.circular(15.0),
         ),
@@ -41,7 +41,7 @@ ThemeData light = ThemeData(
 ThemeData dark = ThemeData(
     brightness: Brightness.dark,
     primaryColor: Color(0xFF202022),
-    accentColor: Color(0xFFe0bf4f),
+    accentColor: Color(0xFFf0bd3e),
     scaffoldBackgroundColor: Color(0xFF202022),
     cardTheme: CardTheme(
       color: Color(0xFF2D2D2F),
@@ -54,7 +54,7 @@ ThemeData dark = ThemeData(
             vertical: 15.0, horizontal: 10.0),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: Color(0xFFe0bf4f),
+            color: Color(0xFFf0bd3e),
           ),
           borderRadius: BorderRadius.circular(15.0),
         ),

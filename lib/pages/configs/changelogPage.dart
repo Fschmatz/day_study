@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class ChangelogPage extends StatelessWidget {
 
-  Color? themeColorApp = Color(0xFFe3bc3b);
+  Color? themeColorApp = Color(0xFFf0bd3e);
 
   @override
   Widget build(BuildContext context) {

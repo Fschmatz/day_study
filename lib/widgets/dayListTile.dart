@@ -64,8 +64,8 @@ class _DayListTileState extends State<DayListTile> {
     showModalBottomSheet(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
-            topLeft: const Radius.circular(20.0),
-            topRight: const Radius.circular(20.0)),
+            topLeft: const Radius.circular(25.0),
+            topRight: const Radius.circular(25.0)),
       ),
       context: context,
       isScrollControlled: true,
@@ -163,7 +163,12 @@ class _DayListTileState extends State<DayListTile> {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      tileColor: Theme.of(context).cardTheme.color,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(25),
+      ),
       leading: Icon(Icons.calendar_today_outlined),
+      horizontalTitleGap: 25,
       title: Text(widget.daynote.day,
           style: TextStyle(
               fontWeight: FontWeight.w600,

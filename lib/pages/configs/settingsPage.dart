@@ -19,7 +19,7 @@ class _SettingsPageState extends State<SettingsPage> {
     super.initState();
   }
 
-  Color? themeColorApp = Color(0xFFe3bc3b);
+  Color? themeColorApp = Color(0xFFf0bd3e);
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 margin: const EdgeInsets.fromLTRB(16, 20, 16, 25),
                 color: themeColorApp,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
                 ),
                 child: ListTile(
                   title: Text(

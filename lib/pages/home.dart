@@ -43,7 +43,33 @@ class _HomeState extends State<Home> {
         body: ListView(
           physics: AlwaysScrollableScrollPhysics(),
           children: [
-            ListView.separated(
+
+            Padding(
+              padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+              child: GridView.builder(
+                  physics: ScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: dayNotesList.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: 3.5,
+                   mainAxisSpacing: 10,
+                    crossAxisSpacing: 10,
+                  ),
+                  itemBuilder: (BuildContext context, int index) {
+                    return DayListTile(
+                      daynote: new DayNote(
+                        dayNotesList[index]['id'],
+                        dayNotesList[index]['day'],
+                        dayNotesList[index]['note'],
+                      ),
+                      refreshHome: getAllDayNotes,
+                      key: UniqueKey(),
+                    );
+                  }),
+            ),
+
+           /* ListView.separated(
                 physics: NeverScrollableScrollPhysics(),
                 separatorBuilder: (context, index) => const Divider(),
                 shrinkWrap: true,
@@ -58,7 +84,7 @@ class _HomeState extends State<Home> {
                     refreshHome: getAllDayNotes,
                     key: UniqueKey(),
                   );
-                }),
+                }),*/
           ],
         ),
         floatingActionButton: Container(
