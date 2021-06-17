@@ -5,13 +5,33 @@ import 'package:shared_preferences/shared_preferences.dart';
 ThemeData light = ThemeData(
     brightness: Brightness.light,
     primaryColor: Color(0xFFFFFFFF),
-    accentColor: Color(0xFF4CB357),
+    accentColor: Color(0xFFe3bc3b),
     scaffoldBackgroundColor: Color(0xFFFFFFFF),
     cardTheme: CardTheme(
       color: Color(0xFFF5F5F5),
     ),
     dialogTheme: DialogTheme(
       backgroundColor: Color(0xFFF9F9F9),
+    ),
+    inputDecorationTheme: InputDecorationTheme(
+        contentPadding: EdgeInsets.symmetric(
+            vertical: 15.0, horizontal: 10.0),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Color(0xFFe3bc3b),
+          ),
+          borderRadius: BorderRadius.circular(15.0),
+        ),
+        enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.grey.withOpacity(0.3),
+            ),
+            borderRadius: BorderRadius.circular(15.0)),
+        border: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.grey.withOpacity(0.3),
+            ),
+            borderRadius: BorderRadius.circular(15.0))
     ),
     bottomAppBarColor: Color(0xFFE6E6E6),
     bottomSheetTheme:
@@ -21,7 +41,7 @@ ThemeData light = ThemeData(
 ThemeData dark = ThemeData(
     brightness: Brightness.dark,
     primaryColor: Color(0xFF202022),
-    accentColor: Color(0xFF56a85f),
+    accentColor: Color(0xFFe0bf4f),
     scaffoldBackgroundColor: Color(0xFF202022),
     cardTheme: CardTheme(
       color: Color(0xFF2D2D2F),
@@ -34,7 +54,7 @@ ThemeData dark = ThemeData(
             vertical: 15.0, horizontal: 10.0),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: Color(0xFF4CB357),
+            color: Color(0xFFe0bf4f),
           ),
           borderRadius: BorderRadius.circular(15.0),
         ),
@@ -72,9 +92,7 @@ class ThemeNotifier extends ChangeNotifier {
   }
 
   _initPrefs() async {
-    if (prefs == null) {
       prefs = await SharedPreferences.getInstance();
-    }
   }
 
   _loadFromPrefs() async {

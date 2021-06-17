@@ -72,8 +72,8 @@ class _DayListTileState extends State<DayListTile> {
       builder: (BuildContext context) {
         return DraggableScrollableSheet(
           expand: false,
-          initialChildSize: 0.35,
-          maxChildSize: widget.daynote.note.length > 350 ?  0.7 : 0.4,
+          initialChildSize: 0.4,
+          maxChildSize: widget.daynote.note.length > 400 ? 0.7 : 0.55,
           builder: (BuildContext context, myscrollController) {
             return Container(
               child: ListView.builder(
