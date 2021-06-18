@@ -131,7 +131,7 @@ class _EditNoteState extends State<EditNote> {
                       chooseDate();
                     },
                     contentPadding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                    leading: Icon(Icons.date_range_outlined),
+                    leading: Icon(Icons.calendar_today_outlined),
                     title: Text(getSelectedDateFormatted().toString()),
                   ),
                   const SizedBox(
