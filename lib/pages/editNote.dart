@@ -5,19 +5,17 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 class EditNote extends StatefulWidget {
-
   DayNote dayNoteEdit;
 
-  EditNote({Key? key, required this.dayNoteEdit})
-      : super(key: key);
+  EditNote({Key? key, required this.dayNoteEdit}) : super(key: key);
 
   @override
   _EditNoteState createState() => _EditNoteState();
 }
 
 class _EditNoteState extends State<EditNote> {
-
   final dbDayNotes = DayNoteDao.instance;
+  late DateTime dateSelected;
 
   TextEditingController customControllerNote = TextEditingController();
 
@@ -25,21 +23,21 @@ class _EditNoteState extends State<EditNote> {
   void initState() {
     super.initState();
     customControllerNote.text = widget.dayNoteEdit.note;
+    dateSelected = DateFormat('dd/MM').parse(widget.dayNoteEdit.day);
   }
 
-  getCurrentDate() {
-    return DateFormat('dd/MM').format(DateTime.now());
+  getSelectedDateFormatted() {
+    return DateFormat('dd/MM').format(dateSelected);
   }
 
   void _updateDayNote() async {
     Map<String, dynamic> row = {
       DayNoteDao.columnId: widget.dayNoteEdit.id,
-      DayNoteDao.columnDay: widget.dayNoteEdit.day,
+      DayNoteDao.columnDay: getSelectedDateFormatted().toString(),
       DayNoteDao.columnNote: customControllerNote.text,
     };
     final update = await dbDayNotes.update(row);
   }
-
 
   String checkProblems() {
     String errors = "";
@@ -84,10 +82,22 @@ class _EditNoteState extends State<EditNote> {
     );
   }
 
+  chooseDate() async {
+    DateTime? data = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(DateTime.now().year - 5),
+        lastDate: DateTime(DateTime.now().year + 5));
+
+    if (data != null) {
+      setState(() {
+        dateSelected = data;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
         appBar: AppBar(
           title: Text("New Note"),
@@ -117,11 +127,16 @@ class _EditNoteState extends State<EditNote> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   ListTile(
+                    onTap: () {
+                      chooseDate();
+                    },
                     contentPadding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                    leading: Icon(Icons.calendar_today_outlined),
-                    title: Text(getCurrentDate().toString()),
+                    leading: Icon(Icons.date_range_outlined),
+                    title: Text(getSelectedDateFormatted().toString()),
                   ),
-                  const SizedBox(height: 10,),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   TextField(
                     autofocus: true,
                     minLines: 1,
@@ -130,22 +145,16 @@ class _EditNoteState extends State<EditNote> {
                     maxLengthEnforcement: MaxLengthEnforcement.enforced,
                     controller: customControllerNote,
                     decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.text_snippet_outlined, size: 20,color: Theme.of(context)
-                            .textTheme
-                            .headline6!
-                            .color!
-                           ),
-                        hintText: "Note",
-                        helperText: "* Required",
+                      prefixIcon: Icon(Icons.text_snippet_outlined,
+                          size: 20,
+                          color: Theme.of(context).textTheme.headline6!.color!),
+                      hintText: "Note",
+                      helperText: "* Required",
                     ),
                     style: TextStyle(
                       fontSize: 17,
                     ),
                   ),
-                ]
-            )
-        )
-    );
-
+                ])));
   }
 }

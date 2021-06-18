@@ -64,8 +64,8 @@ class _DayListTileState extends State<DayListTile> {
     showModalBottomSheet(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
-            topLeft: const Radius.circular(25.0),
-            topRight: const Radius.circular(25.0)),
+            topLeft: const Radius.circular(20.0),
+            topRight: const Radius.circular(20.0)),
       ),
       context: context,
       isScrollControlled: true,
@@ -77,7 +77,9 @@ class _DayListTileState extends State<DayListTile> {
           builder: (BuildContext context, myscrollController) {
             return Container(
               child: ListView.builder(
+                physics: BouncingScrollPhysics(),
                 controller: myscrollController,
+                shrinkWrap: true,
                 itemCount: 1,
                 itemBuilder: (BuildContext context, int index) {
                   return Container(
@@ -165,7 +167,7 @@ class _DayListTileState extends State<DayListTile> {
     return ListTile(
       tileColor: Theme.of(context).cardTheme.color,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(25),
+        borderRadius: BorderRadius.circular(20),
       ),
       leading: Icon(Icons.calendar_today_outlined),
       horizontalTitleGap: 25,

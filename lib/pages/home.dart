@@ -45,7 +45,7 @@ class _HomeState extends State<Home> {
           children: [
 
             Padding(
-              padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+              padding: const EdgeInsets.fromLTRB(16, 10, 16, 0),
               child: GridView.builder(
                   physics: ScrollPhysics(),
                   shrinkWrap: true,
@@ -53,8 +53,8 @@ class _HomeState extends State<Home> {
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     childAspectRatio: 3.5,
-                   mainAxisSpacing: 10,
-                    crossAxisSpacing: 10,
+                   mainAxisSpacing: 12,
+                    crossAxisSpacing: 15,
                   ),
                   itemBuilder: (BuildContext context, int index) {
                     return DayListTile(
@@ -68,23 +68,6 @@ class _HomeState extends State<Home> {
                     );
                   }),
             ),
-
-           /* ListView.separated(
-                physics: NeverScrollableScrollPhysics(),
-                separatorBuilder: (context, index) => const Divider(),
-                shrinkWrap: true,
-                itemCount: dayNotesList.length,
-                itemBuilder: (context, index) {
-                  return DayListTile(
-                    daynote: new DayNote(
-                      dayNotesList[index]['id'],
-                      dayNotesList[index]['day'],
-                      dayNotesList[index]['note'],
-                    ),
-                    refreshHome: getAllDayNotes,
-                    key: UniqueKey(),
-                  );
-                }),*/
           ],
         ),
         floatingActionButton: Container(

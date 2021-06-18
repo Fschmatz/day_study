@@ -1,17 +1,21 @@
 class Changelog{
 
-  static String appVersion = "1.1.2";
+  static String appVersion = "1.2.0";
   static String appName = "Day Study Fschmtz";
 
   static String changelogCurrent = '''
-1.1.2
+1.2.0
+- Added DatePicker to New/Edit Note
+- Small UI Changes
+''';
+
+  static String changelogsOld = '''
+1.1.0
 - Bottom Sheet with Scroll
 - Home with GridView
 - Bug Fixes
 - Changed Accent Color
-''';
 
-  static String changelogsOld = '''
 1.0.2
 - Technically Usable
 - UI Changes

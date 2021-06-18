@@ -12,6 +12,7 @@ class NewNote extends StatefulWidget {
 class _NewNoteState extends State<NewNote> {
 
   final dbDayNotes = DayNoteDao.instance;
+  late DateTime dateSelected;
 
   TextEditingController customControllerNote = TextEditingController();
 
@@ -19,16 +20,17 @@ class _NewNoteState extends State<NewNote> {
   @override
   void initState() {
     super.initState();
+    dateSelected = DateTime.now();
   }
 
-  getCurrentDate() {
-    return DateFormat('dd/MM').format(DateTime.now());
+  getSelectedDateFormatted() {
+    return DateFormat('dd/MM').format(dateSelected);
   }
 
   void _saveNote() async {
     Map<String, dynamic> row = {
       DayNoteDao.columnNote: customControllerNote.text,
-      DayNoteDao.columnDay: getCurrentDate().toString(),
+      DayNoteDao.columnDay: getSelectedDateFormatted().toString(),
     };
     final id = await dbDayNotes.insert(row);
     print('id = $id');
@@ -77,6 +79,20 @@ class _NewNoteState extends State<NewNote> {
     );
   }
 
+  chooseDate() async {
+    DateTime? data = await showDatePicker(
+        context: context,
+        initialDate: dateSelected,
+        firstDate: DateTime(DateTime.now().year - 5),
+        lastDate: DateTime(DateTime.now().year + 5));
+
+    if (data != null) {
+      setState(() {
+        dateSelected = data;
+      });
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -110,9 +126,12 @@ class _NewNoteState extends State<NewNote> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   ListTile(
+                    onTap: () {
+                      chooseDate();
+                    },
                     contentPadding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                    leading: Icon(Icons.calendar_today_outlined),
-                    title: Text(getCurrentDate().toString()),
+                    leading: Icon(Icons.date_range_outlined),
+                    title: Text(getSelectedDateFormatted().toString()),
                   ),
                   const SizedBox(height: 10,),
                   TextField(
