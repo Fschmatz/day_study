@@ -52,7 +52,7 @@ class _HomeState extends State<Home> {
                   itemCount: dayNotesList.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                   childAspectRatio: 3.4,
+                   childAspectRatio: 3.3,
                    mainAxisSpacing: 12,
                     crossAxisSpacing: 15,
                   ),
@@ -73,7 +73,7 @@ class _HomeState extends State<Home> {
         floatingActionButton: Container(
           child: FittedBox(
             child: FloatingActionButton(
-              backgroundColor: Theme.of(context).accentColor,
+              backgroundColor: Theme.of(context).accentColor.withOpacity(0.9),
               elevation: 0.0,
               onPressed: () {
                 Navigator.push(
