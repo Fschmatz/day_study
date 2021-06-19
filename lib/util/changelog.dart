@@ -1,10 +1,10 @@
 class Changelog{
 
-  static String appVersion = "1.2.0";
+  static String appVersion = "1.2.1";
   static String appName = "Day Study Fschmtz";
 
   static String changelogCurrent = '''
-1.2.0
+1.2.1
 - Added DatePicker to New/Edit Note
 - Small UI Changes
 ''';

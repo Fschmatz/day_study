@@ -52,7 +52,7 @@ class _HomeState extends State<Home> {
                   itemCount: dayNotesList.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    childAspectRatio: 3.5,
+                   childAspectRatio: 3.4,
                    mainAxisSpacing: 12,
                     crossAxisSpacing: 15,
                   ),

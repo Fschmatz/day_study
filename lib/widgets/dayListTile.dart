@@ -74,15 +74,13 @@ class _DayListTileState extends State<DayListTile> {
           expand: false,
           initialChildSize: 0.4,
           maxChildSize: widget.daynote.note.length > 400 ? 0.7 : 0.55,
-          builder: (BuildContext context, myscrollController) {
+          builder: (BuildContext context, myScrollController) {
             return Container(
-              child: ListView.builder(
-                physics: BouncingScrollPhysics(),
-                controller: myscrollController,
+              child: ListView(
+                controller: myScrollController,
                 shrinkWrap: true,
-                itemCount: 1,
-                itemBuilder: (BuildContext context, int index) {
-                  return Container(
+                children: [
+                  Container(
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(0, 10, 0, 30),
                       child: Wrap(
@@ -103,7 +101,6 @@ class _DayListTileState extends State<DayListTile> {
                                   icon: Icon(Icons.delete_outline_outlined,size: 20,),
                                   splashRadius: 26,
                                   onPressed: () {
-                                   // Navigator.of(context).pop();
                                     showAlertDialogOkDelete(context);
                                   },
                                 ),
@@ -152,8 +149,8 @@ class _DayListTileState extends State<DayListTile> {
                         ],
                       ),
                     ),
-                  );
-                },
+                  )
+              ]
               ),
             );
           },
