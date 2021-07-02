@@ -62,12 +62,14 @@ class _HomeState extends State<Home> {
                         dayNotesList[index]['id'],
                         dayNotesList[index]['day'],
                         dayNotesList[index]['note'],
+                        dayNotesList[index]['starred'] == null ? 0 : dayNotesList[index]['starred'],
                       ),
                       refreshHome: getAllDayNotes,
                       key: UniqueKey(),
                     );
                   }),
             ),
+            const SizedBox(height: 50,)
           ],
         ),
         floatingActionButton: Container(

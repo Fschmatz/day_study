@@ -80,7 +80,7 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               ListTile(
                 leading: Icon(
-                  Icons.text_snippet_outlined,
+                  Icons.article_outlined,
                 ),
                 title: Text(
                   "Changelog",

@@ -6,12 +6,13 @@ import 'package:path_provider/path_provider.dart';
 class DayNoteDao {
 
   static final _databaseName = 'DayStudy.db';
-  static final _databaseVersion = 1;
+  static final _databaseVersion = 3;
 
   static final table = 'note';
   static final columnId = 'id';
   static final columnDay = 'day';
   static final columnNote = 'note';
+  static final columnStarred = 'starred';
 
   static Database? _database;
   Future<Database> get database async =>
@@ -27,7 +28,8 @@ class DayNoteDao {
     String path = join(documentsDirectory.path, _databaseName);
     return await openDatabase(path,
         version: _databaseVersion,
-        onCreate: _onCreate);
+        onCreate: _onCreate,
+        onUpgrade: _onUpgrade);
   }
 
   // SQL create DB
@@ -36,9 +38,16 @@ class DayNoteDao {
           CREATE TABLE $table (
            $columnId INTEGER PRIMARY KEY,            
            $columnDay TEXT NOT NULL,    
-           $columnNote TEXT NOT NULL            
+           $columnNote TEXT NOT NULL
           )
           ''');
+  }
+
+  // UPGRADE DATABASE TABLES
+  void _onUpgrade(Database db, int oldVersion, int newVersion) {
+    if (oldVersion < newVersion) {
+      db.execute("ALTER TABLE $table ADD COLUMN $columnStarred INTEGER;");
+    }
   }
 
   Future<int> insert(Map<String, dynamic> row) async {
