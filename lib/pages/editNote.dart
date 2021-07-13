@@ -100,7 +100,7 @@ class _EditNoteState extends State<EditNote> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("New Note"),
+          title: Text("Edit Note"),
           elevation: 0,
           actions: [
             Padding(

@@ -75,7 +75,7 @@ class _HomeState extends State<Home> {
         floatingActionButton: Container(
           child: FittedBox(
             child: FloatingActionButton(
-              backgroundColor: Theme.of(context).accentColor.withOpacity(0.9),
+              backgroundColor: Theme.of(context).accentColor,
               elevation: 0.0,
               onPressed: () {
                 Navigator.push(
