@@ -83,7 +83,7 @@ class _DayListTileState extends State<DayListTile> {
       builder: (BuildContext context) {
         return DraggableScrollableSheet(
           expand: false,
-          initialChildSize: 0.4,
+          initialChildSize: 0.35,
           maxChildSize: widget.daynote.note.length > 400 ? 0.7 : 0.55,
           builder: (BuildContext context, myScrollController) {
             return Container(
@@ -213,7 +213,7 @@ class _DayListTileState extends State<DayListTile> {
       return ListTile(
       tileColor: Theme.of(context).cardTheme.color,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(18),
       ),
       leading: Icon(
         Icons.calendar_today_outlined,
@@ -224,7 +224,7 @@ class _DayListTileState extends State<DayListTile> {
       trailing: widget.daynote.starred == 1
           ? Icon(
               Icons.star_border_outlined,
-              color: Theme.of(context).accentColor,
+              color: Theme.of(context).accentTextTheme.headline1!.color,
             )
           : SizedBox.shrink(),
       onTap: openBottomMenuScrollable,

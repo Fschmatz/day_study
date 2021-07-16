@@ -38,7 +38,8 @@ class DayNoteDao {
           CREATE TABLE $table (
            $columnId INTEGER PRIMARY KEY,            
            $columnDay TEXT NOT NULL,    
-           $columnNote TEXT NOT NULL
+           $columnNote TEXT NOT NULL,
+           $columnStarred INTEGER
           )
           ''');
   }

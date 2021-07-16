@@ -4,14 +4,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 //CLARO
 ThemeData light = ThemeData(
     brightness: Brightness.light,
-    primaryColor: Color(0xFFFFFFFF),
+    primaryColor: Color(0xFFF3F3F3),
     accentColor: Color(0xFFE5B53B),
-    scaffoldBackgroundColor: Color(0xFFFFFFFF),
+    scaffoldBackgroundColor: Color(0xFFF3F3F3),
     cardTheme: CardTheme(
-      color: Color(0xFFF5F5F5),
+      color: Color(0xFFFFFFFF),
     ),
     dialogTheme: DialogTheme(
-      backgroundColor: Color(0xFFF9F9F9),
+      backgroundColor: Color(0xFFF3F3F3),
     ),
     inputDecorationTheme: InputDecorationTheme(
         contentPadding: EdgeInsets.symmetric(
@@ -34,14 +34,17 @@ ThemeData light = ThemeData(
             borderRadius: BorderRadius.circular(15.0))
     ),
     bottomAppBarColor: Color(0xFFE6E6E6),
+    accentTextTheme: TextTheme(
+      headline1: TextStyle(color:Color(0xFFE5B53B),),
+    ),
     bottomSheetTheme:
-        BottomSheetThemeData(modalBackgroundColor: Color(0xFFF5F5F5)));
+        BottomSheetThemeData(modalBackgroundColor: Color(0xFFFFFFFF)));
 
 //ESCURO
 ThemeData dark = ThemeData(
     brightness: Brightness.dark,
     primaryColor: Color(0xFF202022),
-    accentColor: Color(0xFFE5B53B),
+    accentColor: Color(0xFFC4A249),
     scaffoldBackgroundColor: Color(0xFF202022),
     cardTheme: CardTheme(
       color: Color(0xFF2D2D2F),
@@ -68,6 +71,9 @@ ThemeData dark = ThemeData(
               color: Colors.grey.withOpacity(0.3),
             ),
             borderRadius: BorderRadius.circular(15.0))
+    ),
+    accentTextTheme: TextTheme(
+      headline1: TextStyle(color:Color(0xFFE5B53B),),
     ),
     bottomAppBarColor: Color(0xFF171719),
     bottomSheetTheme:

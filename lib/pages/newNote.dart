@@ -119,45 +119,58 @@ class _NewNoteState extends State<NewNote> {
             ),
           ],
         ),
-        body: SingleChildScrollView(
-            padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  ListTile(
-                    onTap: () {
-                      chooseDate();
-                    },
-                    contentPadding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                    leading: Icon(Icons.calendar_today_outlined),
-                    title: Text(getSelectedDateFormatted().toString()),
-                  ),
-                  const SizedBox(height: 10,),
-                  TextField(
-                    autofocus: true,
-                    minLines: 1,
-                    maxLines: 12,
-                    maxLength: 2000,
-                    maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                    controller: customControllerNote,
-                    decoration: InputDecoration(
-                      focusColor: Theme.of(context).accentColor,
-                        prefixIcon: Icon(Icons.text_snippet_outlined, size: 20,color: Theme.of(context)
-                            .textTheme
-                            .headline6!
-                            .color!
-                            ,),
-                        hintText: "Note",
-                        helperText: "* Required",
-                    ),
-                    style: TextStyle(
-                      fontSize: 17,
-                    ),
-                  ),
-                ]
-            )
-        )
+        body: ListView(children: [
+          ListTile(
+            leading: SizedBox(
+              height: 0.1,
+            ),
+            title: Text("Choose Date".toUpperCase(),
+                style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w700,
+                    color: Theme.of(context).accentTextTheme.headline1!.color)),
+          ),
+          ListTile(
+            onTap: () {
+              chooseDate();
+            },
+            leading: Icon(Icons.calendar_today_outlined),
+            title: Text(getSelectedDateFormatted().toString()),
+          ),
+          ListTile(
+            leading: SizedBox(
+              height: 0.1,
+            ),
+            title: Text("Note".toUpperCase(),
+                style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w700,
+                    color: Theme.of(context).accentTextTheme.headline1!.color)),
+          ),
+          ListTile(
+            leading: Icon(Icons.notes_outlined),
+            title: TextField(
+              autofocus: true,
+              minLines: 1,
+              maxLines: 12,
+              maxLength: 2000,
+              maxLengthEnforcement: MaxLengthEnforcement.enforced,
+              controller: customControllerNote,
+              decoration: InputDecoration(
+                focusColor: Theme.of(context).accentColor,
+                prefixIcon: Icon(Icons.text_snippet_outlined, size: 20,color: Theme.of(context)
+                    .textTheme
+                    .headline6!
+                    .color!
+                  ,),
+                helperText: "* Required",
+              ),
+              style: TextStyle(
+                fontSize: 17,
+              ),
+            ),
+          ),
+        ])
     );
 
   }
