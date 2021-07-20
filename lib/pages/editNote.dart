@@ -159,11 +159,6 @@ class _EditNoteState extends State<EditNote> {
               controller: customControllerNote,
               decoration: InputDecoration(
                 focusColor: Theme.of(context).accentColor,
-                prefixIcon: Icon(
-                  Icons.text_snippet_outlined,
-                  size: 20,
-                  color: Theme.of(context).textTheme.headline6!.color!,
-                ),
                 helperText: "* Required",
               ),
               style: TextStyle(

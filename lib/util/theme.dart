@@ -44,7 +44,7 @@ ThemeData light = ThemeData(
 ThemeData dark = ThemeData(
     brightness: Brightness.dark,
     primaryColor: Color(0xFF202022),
-    accentColor: Color(0xFFC4A249),
+    accentColor: Color(0xFFE0B84F),
     scaffoldBackgroundColor: Color(0xFF202022),
     cardTheme: CardTheme(
       color: Color(0xFF2D2D2F),
@@ -57,7 +57,7 @@ ThemeData dark = ThemeData(
             vertical: 15.0, horizontal: 10.0),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: Color(0xFFe6b743),
+            color: Color(0xFFE0B84F),
           ),
           borderRadius: BorderRadius.circular(15.0),
         ),

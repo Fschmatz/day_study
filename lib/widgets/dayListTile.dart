@@ -102,7 +102,7 @@ class _DayListTileState extends State<DayListTile> {
                                   style: TextStyle(
                                       fontSize: 13,
                                       fontWeight: FontWeight.w700,
-                                      color: Theme.of(context).accentColor)),
+                                      color: Theme.of(context).accentTextTheme.headline1!.color)),
                               trailing: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
@@ -187,7 +187,7 @@ class _DayListTileState extends State<DayListTile> {
                                   style: TextStyle(
                                       fontSize: 13,
                                       fontWeight: FontWeight.w700,
-                                      color: Theme.of(context).accentColor)),
+                                      color: Theme.of(context).accentTextTheme.headline1!.color)),
                             ),
                             ListTile(
                               leading: Icon(Icons.text_snippet_outlined),
