@@ -25,10 +25,6 @@ class _SettingsPageState extends State<SettingsPage> {
     Color? themeColorApp =Theme.of(context).accentTextTheme.headline1!.color;
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Settings"),
-          elevation: 0,
-        ),
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

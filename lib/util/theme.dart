@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 ThemeData light = ThemeData(
     brightness: Brightness.light,
     primaryColor: Color(0xFFF3F3F3),
-    accentColor: Color(0xFFE5B53B),
+    accentColor: Colors.amber,
     scaffoldBackgroundColor: Color(0xFFF3F3F3),
     cardTheme: CardTheme(
       color: Color(0xFFFFFFFF),
@@ -18,7 +18,7 @@ ThemeData light = ThemeData(
             vertical: 15.0, horizontal: 10.0),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: Color(0xFFFDD835),
+            color:  Colors.amber,
           ),
           borderRadius: BorderRadius.circular(15.0),
         ),
@@ -33,9 +33,20 @@ ThemeData light = ThemeData(
             ),
             borderRadius: BorderRadius.circular(15.0))
     ),
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: Colors.amber,
+      elevation: 1
+    ),
     bottomAppBarColor: Color(0xFFE6E6E6),
     accentTextTheme: TextTheme(
-      headline1: TextStyle(color:Color(0xFFE5B53B),),
+      headline1: TextStyle(color: Colors.amber,),
+    ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      selectedIconTheme: IconThemeData(color: Colors.deepPurple),
+      selectedLabelStyle: TextStyle(color: Colors.deepPurple),
+      showSelectedLabels: false,
+      showUnselectedLabels: false,
+      backgroundColor: Color(0xFFE5E5E5),
     ),
     bottomSheetTheme:
         BottomSheetThemeData(modalBackgroundColor: Color(0xFFFFFFFF)));
@@ -44,7 +55,7 @@ ThemeData light = ThemeData(
 ThemeData dark = ThemeData(
     brightness: Brightness.dark,
     primaryColor: Color(0xFF202022),
-    accentColor: Color(0xFFE0B84F),
+    accentColor: Colors.amberAccent[100],//Color(0xFFE0B84F),
     scaffoldBackgroundColor: Color(0xFF202022),
     cardTheme: CardTheme(
       color: Color(0xFF2D2D2F),
@@ -57,7 +68,7 @@ ThemeData dark = ThemeData(
             vertical: 15.0, horizontal: 10.0),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: Color(0xFFE0B84F),
+            color: Colors.amberAccent[100]!,
           ),
           borderRadius: BorderRadius.circular(15.0),
         ),
@@ -73,9 +84,20 @@ ThemeData dark = ThemeData(
             borderRadius: BorderRadius.circular(15.0))
     ),
     accentTextTheme: TextTheme(
-      headline1: TextStyle(color:Color(0xFFE5B53B),),
+      headline1: TextStyle(color: Colors.amberAccent[100],),
     ),
-    bottomAppBarColor: Color(0xFF171719),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      selectedIconTheme: IconThemeData(color: Color(0xFFA590D5)),
+      selectedLabelStyle: TextStyle(color: Color(0xFFA590D5)),
+      showSelectedLabels: false,
+      showUnselectedLabels: false,
+      backgroundColor: Color(0xFF151517),
+    ),
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+        backgroundColor: Color(0xFFdbb756),
+        elevation: 1
+    ),
+    bottomAppBarColor: Color(0xFFE0B84F),
     bottomSheetTheme:
         BottomSheetThemeData(modalBackgroundColor: Color(0xFF202022)));
 

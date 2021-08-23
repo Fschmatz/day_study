@@ -66,6 +66,11 @@ class DayNoteDao {
     return await db.rawQuery('SELECT * FROM $table ORDER BY id DESC');
   }
 
+  Future<List<Map<String, dynamic>>> queryRecents() async {
+    Database db = await instance.database;
+    return await db.rawQuery('SELECT * FROM $table ORDER BY id DESC LIMIT 5');
+  }
+
   Future<int> update(Map<String, dynamic> row) async {
     Database db = await instance.database;
     int id = row[columnId];

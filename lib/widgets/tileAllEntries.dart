@@ -3,18 +3,18 @@ import 'package:day_study/db/dayNoteDao.dart';
 import 'package:day_study/pages/editNote.dart';
 import 'package:flutter/material.dart';
 
-class DayListTile extends StatefulWidget {
+class tileAllEntries extends StatefulWidget {
   @override
-  _DayListTileState createState() => _DayListTileState();
+  _tileAllEntriesState createState() => _tileAllEntriesState();
 
   DayNote daynote;
   Function() refreshHome;
 
-  DayListTile({Key? key, required this.daynote, required this.refreshHome})
+  tileAllEntries({Key? key, required this.daynote, required this.refreshHome})
       : super(key: key);
 }
 
-class _DayListTileState extends State<DayListTile> {
+class _tileAllEntriesState extends State<tileAllEntries> {
   Future<void> _delete() async {
     final dbDayNotes = DayNoteDao.instance;
     final deleted = await dbDayNotes.delete(widget.daynote.id);
