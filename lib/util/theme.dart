@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 ThemeData light = ThemeData(
     brightness: Brightness.light,
     primaryColor: Color(0xFFF3F3F3),
-    accentColor: Colors.amber,
+    accentColor: Colors.orangeAccent[700],
     scaffoldBackgroundColor: Color(0xFFF3F3F3),
     cardTheme: CardTheme(
       color: Color(0xFFFFFFFF),
@@ -18,7 +18,7 @@ ThemeData light = ThemeData(
             vertical: 15.0, horizontal: 10.0),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color:  Colors.amber,
+            color: Colors.orangeAccent[700]!,
           ),
           borderRadius: BorderRadius.circular(15.0),
         ),
@@ -34,12 +34,12 @@ ThemeData light = ThemeData(
             borderRadius: BorderRadius.circular(15.0))
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: Colors.amber,
+      backgroundColor: Colors.orangeAccent[700],
       elevation: 1
     ),
-    bottomAppBarColor: Color(0xFFE6E6E6),
+    bottomAppBarColor: Color(0xFFE5E5E5),
     accentTextTheme: TextTheme(
-      headline1: TextStyle(color: Colors.amber,),
+      headline1: TextStyle(color: Colors.orangeAccent[700],),
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       selectedIconTheme: IconThemeData(color: Colors.deepPurple),

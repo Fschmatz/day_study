@@ -44,7 +44,7 @@ class _PgAllEntriesState extends State<PgAllEntries> {
               physics: AlwaysScrollableScrollPhysics(),
               children: [
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
+                  padding: const EdgeInsets.fromLTRB(16, 5, 16, 0),
                   child: GridView.builder(
                       physics: ScrollPhysics(),
                       shrinkWrap: true,

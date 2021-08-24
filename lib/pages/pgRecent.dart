@@ -43,7 +43,7 @@ class _PgRecentState extends State<PgRecent> {
             ? Center(child: SizedBox.shrink())
             : ListView(physics: AlwaysScrollableScrollPhysics(), children: [
                 ListView.separated(
-                  separatorBuilder: (context, index) => const SizedBox(height: 10,),
+                  separatorBuilder: (context, index) => const SizedBox(height: 12,),
                   physics: ScrollPhysics(),
                   shrinkWrap: true,
                   itemCount: dayNotesList.length,

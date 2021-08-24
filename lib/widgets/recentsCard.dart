@@ -131,7 +131,7 @@ class _RecentsCardState extends State<RecentsCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
+      padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
       child: Card(
         elevation: 0,
         shape: RoundedRectangleBorder(
@@ -140,54 +140,52 @@ class _RecentsCardState extends State<RecentsCard> {
         child: InkWell(
           borderRadius: BorderRadius.circular(25),
           onTap: openBottomMenu,
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(3, 5, 0, 12),
-            child: Column(
-              children: <Widget>[
-                ListTile(
-                  contentPadding: const EdgeInsets.fromLTRB(16, 0, 5, 0),
-                  title: Text(widget.daynote.day,
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w700,
-                          color: Theme.of(context)
-                              .accentTextTheme
-                              .headline1!
-                              .color)),
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      widget.daynote.starred == 0
-                          ? IconButton(
-                              icon: Icon(
-                                Icons.star_outline,
-                              ),
-                              onPressed: () {
-                                _changeStarredStatus();
-                                widget.refreshHome();
-                              },
-                            )
-                          : IconButton(
-                              icon: Icon(
-                                Icons.star_border_outlined,
-                                color: Theme.of(context).accentColor,
-                              ),
-                              onPressed: () {
-                                _changeStarredStatus();
-                                widget.refreshHome();
-                              },
+          child: Column(
+            children: <Widget>[
+              ListTile(
+                contentPadding: const EdgeInsets.fromLTRB(16, 0, 5, 0),
+                title: Text(widget.daynote.day,
+                    style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w700,
+                        color: Theme.of(context)
+                            .accentTextTheme
+                            .headline1!
+                            .color)),
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    widget.daynote.starred == 0
+                        ? IconButton(
+                            icon: Icon(
+                              Icons.star_outline,
                             ),
-                    ],
-                  ),
+                            onPressed: () {
+                              _changeStarredStatus();
+                              widget.refreshHome();
+                            },
+                          )
+                        : IconButton(
+                            icon: Icon(
+                              Icons.star_border_outlined,
+                              color: Theme.of(context).accentColor,
+                            ),
+                            onPressed: () {
+                              _changeStarredStatus();
+                              widget.refreshHome();
+                            },
+                          ),
+                  ],
                 ),
-                ListTile(
-                  title: Text(
-                    widget.daynote.note,
-                    style: TextStyle(fontSize: 16),
-                  ),
+              ),
+              ListTile(
+                contentPadding: const EdgeInsets.fromLTRB(16, 0, 16, 10),
+                title: Text(
+                  widget.daynote.note,
+                  style: TextStyle(fontSize: 16),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
